@@ -1,0 +1,19 @@
+.vscode/
+# Build output (root and any nested build/ dirs)
+build/
+**/build/
+
+# Object and archive files
+*.o
+*.a
+*.so
+
+# Binary
+*.out
+zombie
+horde
+references
+colt
+replace
+harl
+harlFilter
