@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:51:07 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/30 15:51:09 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/02/06 22:29:20 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ class Contact
 	std::string getPhoneNumber() const;
 	std::string getDarkestSecret() const;
 
-	void setFirstName(const std::string &firstName);
-	void setLastName(const std::string &lastName);
-	void setNickName(const std::string &nickName);
-	void setPhoneNumber(const std::string &phoneNumber);
-	void setDarkestSecret(const std::string &darkestSecret);
+	void setFirstName(const std::string& firstName);
+	void setLastName(const std::string& lastName);
+	void setNickName(const std::string& nickName);
+	void setPhoneNumber(const std::string& phoneNumber);
+	void setDarkestSecret(const std::string& darkestSecret);
 };
 
 #endif

@@ -6,11 +6,12 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:51:50 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/30 15:51:52 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/02/08 00:08:18 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Phonebook.hpp"
+#include <optional>
 
 std::optional<Contact>  Phonebook::getContact(int contactIndex) const
 {
@@ -31,7 +32,8 @@ bool Phonebook::addContact(Contact contact)
         m_index = getSize();
         ++m_size;
     }
-    updateContact(m_index, contact);
+    if (!updateContact(m_index, contact))
+        return false;    
     m_index = (m_index + 1) % CONTACTS_CAPACITY;
     return true;
 }

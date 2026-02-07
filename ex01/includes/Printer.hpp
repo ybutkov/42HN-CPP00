@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:51:21 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/30 15:51:23 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/02/07 18:10:03 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,21 @@
 # define PRINTER_HPP
 
 # include "Phonebook.hpp"
+# include <iostream>
+# include <ostream>
+# include <string>
 
 class Printer
 {
 	private:
-		static void printTableRow(int index, const Contact& contact);
+		std::ostream* out;
+		void printTableRow(int index, const Contact& contact);
 	public:
-		static void printPhonebook(const Phonebook& phonebook);
-		static void printContact(const Contact& contact);
+		Printer(std::ostream& out=std::cout): out(&out) {}
+		Printer(const Printer& printer) = default;
+		std::ostream& getOut();
+		void printPhonebook(const Phonebook& phonebook);
+		void printContact(const Contact& contact);
 };
 
 #endif

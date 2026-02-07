@@ -6,13 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:51:32 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/30 15:51:34 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/02/08 00:21:27 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Buro.hpp"
 #include <iomanip>
 #include <iostream>
+#include <optional>
 
 namespace
 {
@@ -20,7 +21,7 @@ bool	isNumber(std::string str, std::size_t from = 0)
 {
 	for (std::size_t i = from; i < str.size(); ++i)
 	{
-		if (!std::isdigit(str[i]))
+		if (!std::isdigit(static_cast<unsigned char>(str[i])))
 			return (false);
 	}
 	return (true);
@@ -33,7 +34,10 @@ std::optional<std::string> inputString(std::string prompt)
 	{
 		std::cout << "Input " << prompt << ": ";
 		if (!std::getline(std::cin, newString))
+		{
+			std::cout << "\nEOF" << std::endl;
 			return (std::nullopt);
+		}
 		if (!newString.empty())
 			break ;
 		std::cout << "Can't be empty line. Try again" << std::endl;
@@ -43,22 +47,25 @@ std::optional<std::string> inputString(std::string prompt)
 
 bool	checkPhoneNumber(std::string phoneNumber)
 {
-	if ((isNumber(phoneNumber) && phoneNumber.size() >= 7
-			&& phoneNumber.size() <= 15) || (phoneNumber[0] == '+'
-			&& isNumber(phoneNumber, 1) && phoneNumber.size() >= 8
-			&& phoneNumber.size() <= 16))
+	if (phoneNumber.empty())
+	{
+		return false;
+	}
+	if ((isNumber(phoneNumber) && phoneNumber.size() >= 7 && phoneNumber.size() <= 15)
+		|| (phoneNumber[0] == '+' && isNumber(phoneNumber, 1)
+			&& phoneNumber.size() >= 8 && phoneNumber.size() <= 16))
 		return (true);
 	return (false);
 }
 
 } // namespace
 
-Phonebook &Buro::getPhonebook()
+Phonebook& Buro::getPhonebook()
 {
 	return (m_phonebook);
 }
 
-Printer &Buro::getPrinter()
+Printer& Buro::getPrinter()
 {
 	return (m_printer);
 }
@@ -83,19 +90,16 @@ void Buro::addContact()
 	firstName = inputString("first name");
 	if (!firstName.has_value())
 	{
-		std::cout << "EOF" << std::endl;
 		return ;
 	}
 	lastName = inputString("last name");
 	if (!lastName.has_value())
 	{
-		std::cout << "EOF" << std::endl;
 		return ;
 	}
 	nickName = inputString("nick name");
 	if (!nickName.has_value())
 	{
-		std::cout << "EOF" << std::endl;
 		return ;
 	}
 	while (true)
@@ -103,7 +107,6 @@ void Buro::addContact()
 		phoneNumber = inputString("phone number");
 		if (!phoneNumber.has_value())
 		{
-			std::cout << "EOF" << std::endl;
 			return ;
 		}
 		if (checkPhoneNumber(phoneNumber.value()))
@@ -113,7 +116,6 @@ void Buro::addContact()
 	darkestSecret = inputString("darkest secret");
 	if (!darkestSecret.has_value())
 	{
-		std::cout << "EOF" << std::endl;
 		return ;
 	}
 	getPhonebook().addContact({firstName.value(), lastName.value(),
@@ -136,10 +138,13 @@ void Buro::searchContact()
 	while (true)
 	{
 		std::cout << "Input contact index: ";
-		std::getline(std::cin, str);
+		if (!std::getline(std::cin, str))
+		{
+			break ;
+		}
 		if (str.empty() || !isNumber(str))
 		{
-			std::cout << "  I will accept only number" << std::endl;
+			std::cout << "  I will accept only correct number" << std::endl;
 			continue ;
 		}
 		index = std::stoi(str);
@@ -166,6 +171,10 @@ void Buro::work()
     std::cout << "Buro is open" << std::endl;
     while (true)
     {
+		if (std::cin.eof())
+		{
+			break ;
+		}
 	    std::cout << "Enter one of three commands(ADD, SEARCH or EXIT): ";
 	    if (!std::getline(std::cin, choice))
             break;
