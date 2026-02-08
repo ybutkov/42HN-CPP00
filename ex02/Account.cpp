@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 23:15:58 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/31 22:34:38 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/02/08 22:33:40 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
 int Account::_totalNbWithdrawals = 0;
 
-Account::Account(void)
+Account::Account(void): _amount(0), _accountIndex(0), _nbDeposits(0), _nbWithdrawals(0)
 {
-	std::cout << "!!!!!!!";
 }
 
 Account::Account(int initial_deposit)
@@ -159,10 +158,10 @@ void Account::_displayTimestamp(void)
 	auto now = std::chrono::system_clock::now();
 	std::time_t t = std::chrono::system_clock::to_time_t(now);
 
-	datetime = get_test_date(); (void)t;
+	// datetime = get_test_date(); (void)t;
 	(void)get_test_date;
 
-	// localtime_r(&t, &datetime);
+	localtime_r(&t, &datetime);
 
 	strftime(output, sizeof(output), "%Y%m%d_%H%M%S", &datetime);
 	std::cout << "[" << output << "] ";	
