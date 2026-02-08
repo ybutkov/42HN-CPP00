@@ -39,6 +39,6 @@ re: fclean all
 
 v: re
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes \
-  		--error-exitcode=1 ./$(NAME) "asd sdf asd asd asd asd "
+  		--error-exitcode=1 ./$(NAME)
 
 .PHONY: all clean fclean re

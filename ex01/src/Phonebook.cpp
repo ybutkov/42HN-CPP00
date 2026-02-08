@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:51:50 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/02/08 00:08:18 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/02/08 21:47:20 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ bool Phonebook::addContact(Contact contact)
 {
     if (getSize() < CONTACTS_CAPACITY)
     {
-        m_index = getSize();
         ++m_size;
     }
     if (!updateContact(m_index, contact))

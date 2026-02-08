@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:51:38 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/01/30 15:51:40 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/02/08 18:21:16 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,27 @@ Contact::Contact(std::string first, std::string last, std::string nick,
 {
 }
 
-std::string Contact::getFirstName() const
+const std::string& Contact::getFirstName() const
 {
 	return (m_firstName);
 }
-std::string Contact::getLastName() const
+
+const std::string& Contact::getLastName() const
 {
 	return (m_lastName);
 }
 
-std::string Contact::getNickName() const
+const std::string& Contact::getNickName() const
 {
 	return (m_nickName);
 }
 
-std::string Contact::getPhoneNumber() const
+const std::string& Contact::getPhoneNumber() const
 {
 	return (m_phoneNumber);
 }
 
-std::string Contact::getDarkestSecret() const
+const std::string& Contact::getDarkestSecret() const
 {
 	return (m_darkestSecret);
 }

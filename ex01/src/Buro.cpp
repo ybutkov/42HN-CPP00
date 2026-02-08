@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:51:32 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/02/08 00:21:27 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/02/08 21:50:39 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <iomanip>
 #include <iostream>
 #include <optional>
+#include <cctype>
 
 namespace
 {
@@ -60,22 +61,32 @@ bool	checkPhoneNumber(std::string phoneNumber)
 
 } // namespace
 
+const Phonebook& Buro::getPhonebook() const
+{
+	return (*m_phonebook);
+}
+
 Phonebook& Buro::getPhonebook()
 {
-	return (m_phonebook);
+	return (*m_phonebook);
 }
 
 Printer& Buro::getPrinter()
 {
-	return (m_printer);
+	return (*m_printer);
 }
 
-void Buro::setPhonebook(Phonebook &phonebook)
+const Printer& Buro::getPrinter() const
+{
+	return (*m_printer);
+}
+
+void Buro::setPhonebook(Phonebook* phonebook)
 {
 	this->m_phonebook = phonebook;
 }
 
-void Buro::setPrinter(Printer &printer)
+void Buro::setPrinter(Printer* printer)
 {
 	this->m_printer = printer;
 }
@@ -162,12 +173,12 @@ void Buro::searchContact()
 void Buro::work()
 {
 	std::string choice;
-    // m_phonebook.addContact({"aaaaaaaa", "bbbb", "cccc", "123456789012", "dark1" });
-    // m_phonebook.addContact({"aaaaaaaa2", "bbbb2", "cccc2", "223456789012","dark2" });
-    // m_phonebook.addContact({"aaaaaaaaaaaaa3", "bbbb3", "cccc3", "323456789012", "dark3" });
-    // m_phonebook.addContact({"aaaaaaaaaaaaa4", "bbbb4", "cccc4", "423456789012", "dark4" });
-    // m_phonebook.addContact({"aaaaaaaaaaaaa5", "bbbb5", "cccc5", "523456789012", "dark5" });
-    // m_phonebook.addContact({"aaaaaaaaaaaaa6", "bbbb6", "cccc6", "623456789012", "dark6" });
+    // m_phonebook->addContact({"aaaaaaaa", "bbbb", "cccc", "123456789012", "dark1" });
+    // m_phonebook->addContact({"aaaaaaaa2", "bbbb2", "cccc2", "223456789012","dark2" });
+    // m_phonebook->addContact({"aaaaaaaaaaaaa3", "bbbb3", "cccc3", "323456789012", "dark3" });
+    // m_phonebook->addContact({"aaaaaaaaaaaaa4", "bbbb4", "cccc4", "423456789012", "dark4" });
+    // m_phonebook->addContact({"aaaaaaaaaaaaa5", "bbbb5", "cccc5", "523456789012", "dark5" });
+    // m_phonebook->addContact({"aaaaaaaaaaaaa6", "bbbb6", "cccc6", "623456789012", "dark6" });
     std::cout << "Buro is open" << std::endl;
     while (true)
     {

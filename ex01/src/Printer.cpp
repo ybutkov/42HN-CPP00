@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:51:55 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/02/08 00:13:42 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/02/08 18:14:13 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void Printer::printPhonebook(const Phonebook &phonebook)
 	getOut() << "├──────────┼──────────┼──────────┼──────────┤\n";
 	for (int i = 0; i < phonebook.getSize(); ++i)
 	{
-		auto opt = phonebook.getContact(i);
-		if (opt.has_value())
-			printTableRow(i, phonebook.getContact(i).value());
+		auto optContact = phonebook.getContact(i);
+		if (optContact.has_value())
+			printTableRow(i, optContact.value());
 	}
 	getOut() << "└──────────┴──────────┴──────────┴──────────┘" << std::endl;
 }
