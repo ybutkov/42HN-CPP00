@@ -6,7 +6,7 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:51:44 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/02/08 21:11:00 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/02/09 15:01:38 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main()
 	Buro buro(&phonebook, &printer);
 	phonebook.addContact({"John", "Doe", "Johnny", "1234567", "secret"});
 	// Printer printer2(std::cerr);
-	// buro.setPrinter(printer2);
+	// buro.setPrinter(&printer2);
 	buro.work();
 	return (0);
 }

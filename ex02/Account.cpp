@@ -6,13 +6,14 @@
 /*   By: ybutkov <ybutkov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 23:15:58 by ybutkov           #+#    #+#             */
-/*   Updated: 2026/02/08 22:33:40 by ybutkov          ###   ########.fr       */
+/*   Updated: 2026/02/09 15:34:17 by ybutkov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
 #include <iostream>
 #include <ctime>
+#include <iomanip>
 #include <chrono>
 
 namespace
@@ -36,7 +37,7 @@ int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
 int Account::_totalNbWithdrawals = 0;
 
-Account::Account(void): _amount(0), _accountIndex(0), _nbDeposits(0), _nbWithdrawals(0)
+Account::Account(void): _accountIndex(0), _amount(0), _nbDeposits(0), _nbWithdrawals(0)
 {
 }
 
@@ -152,17 +153,11 @@ void Account::displayAccountsInfos(void)
 
 void Account::_displayTimestamp(void)
 {
-	char output[16];
 	std::tm datetime;
-	
-	auto now = std::chrono::system_clock::now();
-	std::time_t t = std::chrono::system_clock::to_time_t(now);
+	std::time_t t = std::time(nullptr);
 
 	// datetime = get_test_date(); (void)t;
-	(void)get_test_date;
+	localtime_r(&t, &datetime); (void)get_test_date;
 
-	localtime_r(&t, &datetime);
-
-	strftime(output, sizeof(output), "%Y%m%d_%H%M%S", &datetime);
-	std::cout << "[" << output << "] ";	
+	std::cout << "[" << std::put_time(&datetime, "%Y%m%d_%H%M%S") << "] ";
 }
